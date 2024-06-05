@@ -5,6 +5,7 @@ Planeta azul é um projeto que visa monitorar a poluição nos oceanos, utilizan
 Medição de pH: O sistema mede o pH da água do mar para determinar o nível de poluição.
 Medição de Turbidez: O sistema também mede a turbidez da água, que pode indicar a presença de partículas e poluentes.
 Display OLED: As medições são exibidas em um display OLED, facilitando a visualização dos dados.
+![tabela PH](https://github.com/EnzoTM1170/EDGE-_GS_2/assets/143804193/6ca2420b-10e3-4adf-acee-dc896fb47cfd)
 ## Componentes Utilizados:
 ### ESP32:
 Microcontrolador que serve como cérebro do projeto, processando as leituras dos sensores e atualizando o display OLED.
@@ -58,6 +59,7 @@ DallasTemperature
 
 ## Conclusão
 O projeto PLANETA AZUL oferece uma solução eficaz para monitorar a poluição nos oceanos, utilizando um ESP32 e sensores de pH e turbidez. Este monitoramento é crucial para a preservação dos ecossistemas marinhos e para a conscientização sobre a poluição da água. Com uma estrutura de código clara e componentes acessíveis, o projeto pode ser expandido e adaptado para diversas aplicações em monitoramento ambiental.
+
 
 
 
