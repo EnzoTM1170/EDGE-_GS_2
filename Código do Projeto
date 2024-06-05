@@ -1,0 +1,84 @@
+#include <Wire.h>
+#include <Adafruit_GFX.h>
+#include <Adafruit_SSD1306.h>
+#include <OneWire.h>
+#include <DallasTemperature.h>
+
+// Definições do display OLED
+#define SCREEN_WIDTH 128
+#define SCREEN_HEIGHT 64
+#define OLED_RESET -1
+Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
+
+// Pino do sensor DS18B20
+#define ONE_WIRE_BUS 4
+OneWire oneWire(ONE_WIRE_BUS);
+DallasTemperature sensors(&oneWire);
+
+// Pino do sensor de turbidez (LDR)
+const int turbidityPin = 34; // GPIO 34 (A0) do ESP32
+// Pino do sensor de pH (assumindo pino analógico)
+const int phPin = 35; // GPIO 35 (A1) do ESP32
+
+void setup() {
+  Serial.begin(115200);
+
+  // Inicializa o display OLED
+  if (!display.begin(SSD1306_SWITCHCAPVCC, 0x3C)) {
+    Serial.println(F("SSD1306 allocation failed"));
+    for (;;);
+  }
+  display.display();
+  delay(2000);
+  display.clearDisplay();
+
+  // Inicializa o sensor de temperatura
+  sensors.begin();
+
+  // Mensagem inicial
+  display.setTextSize(1);
+  display.setTextColor(SSD1306_WHITE);
+  display.setCursor(0, 0);
+  display.println("Monitoring Ocean Pollution");
+  display.display();
+  delay(2000);
+}
+
+void loop() {
+  // Lê o valor da turbidez
+  int turbidityValue = analogRead(turbidityPin);
+  float turbidity = map(turbidityValue, 0, 4095, 0, 100); // Simula leitura de turbidez
+
+  // Lê o valor do sensor de pH
+  float phValue = getFixedPH("clean"); // "clean", "slightly polluted", "moderately polluted", "heavily polluted".
+
+  // Atualiza o display OLED com os valores lidos
+  display.clearDisplay();
+  display.setCursor(0, 0);
+  display.setTextSize(1);
+  display.println("Monitoring Ocean Pollution");
+  display.setTextSize(2);
+  display.setCursor(0, 20);
+  display.print("pH: ");
+  display.println(phValue);
+  display.setCursor(0, 40);
+  display.print("Turbidity: ");
+  display.println(turbidity);
+  display.display();
+
+  delay(2000); // Tempo de espera entre as atualizações dos valores no display
+}
+
+float getFixedPH(String condition) {
+  if (condition == "clean") {
+    return 8.2;
+  } else if (condition == "slightly polluted") {
+    return 7.3;
+  } else if (condition == "moderately polluted") {
+    return 6.8;
+  } else if (condition == "heavily polluted") {
+    return 6.0;
+  } else {
+    return 7.0; // Valor padrão, caso a condição não seja reconhecida
+  }
+}
