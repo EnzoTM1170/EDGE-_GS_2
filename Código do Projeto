@@ -45,25 +45,21 @@ void setup() {
 }
 
 void loop() {
-  // Lê o valor da turbidez
-  int turbidityValue = analogRead(turbidityPin);
-  float turbidity = map(turbidityValue, 0, 4095, 0, 100); // Simula leitura de turbidez
-
   // Lê o valor do sensor de pH
   float phValue = getFixedPH("clean"); // "clean", "slightly polluted", "moderately polluted", "heavily polluted".
+
+  // Ajusta a turbidez com base no pH
+  float turbidity = getTurbidity(phValue);
 
   // Atualiza o display OLED com os valores lidos
   display.clearDisplay();
   display.setCursor(0, 0);
   display.setTextSize(1);
-  display.println("Monitoring Ocean Pollution");
-  display.setTextSize(2);
-  display.setCursor(0, 20);
-  display.print("pH: ");
+  display.print("pH:");
   display.println(phValue);
-  display.setCursor(0, 40);
-  display.print("Turbidity: ");
-  display.println(turbidity);
+  display.setCursor(0, 30); // Ajuste a posição vertical para separar os valores
+  display.print("Turbidez:");
+  display.println((int)turbidity); // Converte para inteiro antes de exibir
   display.display();
 
   delay(2000); // Tempo de espera entre as atualizações dos valores no display
@@ -71,7 +67,7 @@ void loop() {
 
 float getFixedPH(String condition) {
   if (condition == "clean") {
-    return 8.2;
+    return 8.4; // Ajuste o pH para 8.4 para "clean"
   } else if (condition == "slightly polluted") {
     return 7.3;
   } else if (condition == "moderately polluted") {
@@ -80,5 +76,17 @@ float getFixedPH(String condition) {
     return 6.0;
   } else {
     return 7.0; // Valor padrão, caso a condição não seja reconhecida
+  }
+}
+
+float getTurbidity(float pH) {
+  if (pH >= 7.5) {
+    return 5;
+  } else if (pH >= 7.0) {
+    return 10;
+  } else if (pH >= 6.5) {
+    return 15;
+  } else {
+    return 20;
   }
 }
