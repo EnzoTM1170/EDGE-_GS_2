@@ -60,8 +60,9 @@ DallasTemperature
 ## Conclusão
 O projeto PLANETA AZUL oferece uma solução eficaz para monitorar a poluição nos oceanos, utilizando um ESP32 e sensores de pH e turbidez. Este monitoramento é crucial para a preservação dos ecossistemas marinhos e para a conscientização sobre a poluição da água. Com uma estrutura de código clara e componentes acessíveis, o projeto pode ser expandido e adaptado para diversas aplicações em monitoramento ambiental.
 
-
-
+## Membros:
+##### RM Enzo Teles 553899 
+##### RM Nicolas Ribeiro 553273
 
 
 
