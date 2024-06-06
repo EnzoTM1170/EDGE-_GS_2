@@ -13,7 +13,7 @@ Possui conectividade Wi-Fi e Bluetooth, permitindo futuras expansões para envio
 
 ### Sensor de pH:
 Mede o pH da água, fornecendo uma indicação direta da acidez ou alcalinidade.
-Valores de pH são utilizados para inferir o nível de poluição da água. Por exemplo, um pH entre 7.3 e 8.2 é considerado normal para a água do mar, enquanto valores abaixo de 7 indicam poluição.
+Valores de pH são utilizados para inferir o nível de poluição da água. Por exemplo, um pH entre 7.5 e 8.5 é considerado normal para a água do mar, enquanto valores abaixo de 7 indicam poluição.
 
 ### Sensor de Turbidez (LDR):
 Utilizado para medir a turbidez da água, indicando a quantidade de partículas suspensas.
